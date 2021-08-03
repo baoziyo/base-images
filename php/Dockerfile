@@ -25,7 +25,6 @@ RUN set -ex \
             docker-php-ext-configure zip --with-libzip; \
         fi \
     && docker-php-ext-install zip sockets bcmath bz2 opcache \
-    && COPY ./opcache.ini /usr/local/etc/php/conf.d/00_opcache.ini \
 
     && pecl install amqp redis yaml \
     && echo "extension=amqp" > /usr/local/etc/php/conf.d/00_amqp.ini \

@@ -18,7 +18,7 @@ jobs:
         os: ['ubuntu-latest']
         php_version: ['7.1', '7.2', '7.3', '7.4']
         type: ['cli']
-        swoole_version: []
+        swoole_version: ['4.7.0']
     steps:
       - uses: actions/checkout@v2
 
