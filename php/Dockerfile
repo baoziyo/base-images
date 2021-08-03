@@ -11,7 +11,7 @@ RUN set -ex \
     # && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update \
     && apk add --no-cache m4 autoconf gcc g++ make composer git vim \
-        bzip2-dev freetype-dev libjpeg-turbo-dev jpeg-dev libpng-dev libzip-dev rabbitmq-c rabbitmq-c-dev \
+        bzip2-dev freetype-dev libjpeg-turbo-dev jpeg-dev libpng-dev libzip-dev rabbitmq-c rabbitmq-c-dev libyaml-dev \
     
     && if [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.4 ]; then \
             docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/; \
