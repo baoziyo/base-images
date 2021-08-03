@@ -1,8 +1,8 @@
-name: PHP Base Image CI
+name: PHP Swoole CI
 
 on:
   push:
-    tags: 'php-**'
+    tags: 'php_swoole-**'
 
 env:
   7.1: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8
@@ -17,7 +17,8 @@ jobs:
       matrix:
         os: ['ubuntu-latest']
         php_version: ['7.1', '7.2', '7.3', '7.4']
-        type: ['cli', 'fpm']
+        type: ['cli']
+        swoole_version: []
     steps:
       - uses: actions/checkout@v2
 
@@ -47,13 +48,14 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          file: ./php/Dockerfile
+          file: ./php-swoole/Dockerfile
           platforms: ${{ env[matrix.php_version] }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           build-args: |
             PHP_VERSION=${{ matrix.php_version }}
             PHP_TYPE=${{ matrix.type }}
+            SWOOLE_VERSION=${{matrix.swoole_version}}
           
       - name: Logout
         run: docker logout
