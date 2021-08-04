@@ -10,6 +10,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN set -ex \
     # && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update \
+    && apk add --no-cache openssl \
     
     && cd /tmp \
     && if [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.1 ]; then \
@@ -27,7 +28,7 @@ RUN set -ex \
 
     && echo "extension=swoole.so" > /usr/local/etc/php/conf.d/00_swoole.ini \
     && echo "swoole.use_shortname='Off'" >> /usr/local/etc/php/conf.d/00_swoole.ini \
-    && echo "opcache.enable_cli='On'" > /usr/local/etc/php/conf.d/00_opencache.ini; \
+    && echo "opcache.enable_cli='On'" > /usr/local/etc/php/conf.d/00_opencache.ini \
 
     && apk del --purge *-dev \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /usr/share/php7 \
