@@ -13,7 +13,8 @@ RUN set -ex \
     && apk add --no-cache \
         m4 autoconf gcc g++ make \
         composer git vim \
-        bzip2 bzip2-dev libzip-dev zip unzip freetype freetype-dev libjpeg-turbo libjpeg-turbo-dev libwebp libwebp-dev jpeg jpeg-dev libpng libpng-dev rabbitmq-c rabbitmq-c-dev yaml yaml-dev \
+        bzip2 zip unzip freetype libjpeg-turbo libwebp jpeg libpng rabbitmq-c yaml \
+        bzip2-dev libzip-dev freetype-dev libjpeg-turbo-dev libwebp-dev jpeg-dev libpng-dev rabbitmq-c-dev yaml-dev \
     
     && if [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.4 ]; then \
             docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp; \
