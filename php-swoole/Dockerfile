@@ -30,8 +30,8 @@ RUN set -ex \
     && echo "swoole.use_shortname='Off'" >> /usr/local/etc/php/conf.d/00_swoole.ini \
     && echo "opcache.enable_cli='On'" > /usr/local/etc/php/conf.d/00_opencache.ini \
 
-    && apk del --purge *-dev \
-    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /usr/share/php7 \
+    && apk del --purge *-dev m4 autoconf gcc g++ make \
+    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /usr/share/php7 ~/.pearrc \
     
     && php --ini \
     && php -v \
