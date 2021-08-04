@@ -29,7 +29,7 @@ jobs:
           images:
             baoziyoo/base-images
           flavor: |
-            suffix=-php-${{ matrix.type }}-${{ matrix.php_version }}
+            suffix=-php-${{ matrix.type }}-swoole-${{ matrix.php_version }}
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
             type=ref,event=branch
