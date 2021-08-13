@@ -26,7 +26,7 @@ RUN set -ex \
         else \
             docker-php-ext-configure zip --with-libzip; \
         fi \
-    && docker-php-ext-install -j$(nproc) gd zip sockets bcmath bz2 opcache pcntl \
+    && docker-php-ext-install -j$(nproc) gd zip sockets bcmath bz2 opcache pcntl pdo_mysql \
 
     && pecl install amqp redis yaml  \
     && echo "extension=amqp.so" > /usr/local/etc/php/conf.d/00_amqp.ini \
