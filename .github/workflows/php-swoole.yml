@@ -29,7 +29,7 @@ jobs:
           images:
             baoziyoo/base-images
           flavor: |
-            suffix=-php-${{ matrix.type }}-swoole-${{ matrix.php_version }}
+            suffix=-php-${{ matrix.type }}-${{ matrix.php_version }}-swoole-${{ matrix.swoole_version }}
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
             type=ref,event=branch
@@ -56,6 +56,11 @@ jobs:
             PHP_VERSION=${{ matrix.php_version }}
             PHP_TYPE=${{ matrix.type }}
             SWOOLE_VERSION=${{matrix.swoole_version}}
+
+      - name: Update repo description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          repository: https://github.com/baoziyo/base-images
 
       - name: Logout
         run: docker logout

@@ -55,5 +55,10 @@ jobs:
             PHP_VERSION=${{ matrix.php_version }}
             PHP_TYPE=${{ matrix.type }}
 
+      - name: Update repo description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          repository: https://github.com/baoziyo/base-images
+
       - name: Logout
         run: docker logout

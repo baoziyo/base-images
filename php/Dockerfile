@@ -16,12 +16,12 @@ RUN set -ex \
         bzip2 zip unzip freetype libjpeg-turbo libwebp jpeg libpng rabbitmq-c yaml \
         bzip2-dev libzip-dev freetype-dev libjpeg-turbo-dev libwebp-dev jpeg-dev libpng-dev rabbitmq-c-dev yaml-dev \
     
-    && if [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.4 ]; then \
+    && if [[ "['7.4', '8.0', '8.1']" == *"$(php -r "echo sprintf('%.1f',PHP_VERSION);")"* ]]; then \
             docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp; \
         else \
             docker-php-ext-configure gd --with-freetype-dir=/usr/lib/ --with-jpeg-dir=/usr/lib/ --with-png-dir=/usr/lib/; \
         fi \
-    && if [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.3 ] || [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.4 ]; then \
+    && if [[ "['7.3', '7.4', '8.0', '8.1']" == *"$(php -r "echo sprintf('%.1f',PHP_VERSION);")"* ]]; then \
             docker-php-ext-configure zip; \
         else \
             docker-php-ext-configure zip --with-libzip; \
