@@ -58,6 +58,8 @@ jobs:
       - name: Update repo description
         uses: peter-evans/dockerhub-description@v2
         with:
+          username: baoziyoo
+          password: ${{ secrets.DOCKER_TOKEN }}
           repository: https://github.com/baoziyo/base-images
 
       - name: Logout
