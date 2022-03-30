@@ -31,6 +31,7 @@ jobs:
             suffix=-php-${{ matrix.type }}-${{ matrix.php_version }}
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
+            type=ref,event=tag
             type=ref,event=branch
             type=semver,pattern={{version}}
             type=raw,value=latest
@@ -59,8 +60,9 @@ jobs:
         uses: peter-evans/dockerhub-description@v2
         with:
           username: baoziyoo
-          password: ${{ secrets.DOCKER_TOKEN }}
-          repository: https://github.com/baoziyo/base-images
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          repository: baoziyoo/base-images
+          short-description: ${{ github.event.repository.description }}
 
       - name: Logout
         run: docker logout

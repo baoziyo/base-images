@@ -1,8 +1,10 @@
 name: PHP Swoole CI
 
 on:
-  push:
-    tags: 'php_swoole-**'
+  workflow_run:
+    workflows: [ PHP Base Image CI ]
+    types:
+      - completed
 
 env:
   7.1: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8
@@ -15,12 +17,19 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ['ubuntu-latest']
-        php_version: ['7.1', '7.2', '7.3', '7.4']
-        type: ['cli']
-        swoole_version: ['4.7.0']
+        os: [ 'ubuntu-latest' ]
+        php_version: [ '7.1', '7.2', '7.3', '7.4' ]
+        type: [ 'cli' ]
     steps:
       - uses: actions/checkout@v2
+
+      - name: Get Swoole Version
+        shell: bash
+        id: vars
+        run: |
+          curl -s https://github.com/swoole/swoole-src/releases > response
+          swoole_version=$(cat response | grep '/swoole/swoole-src/releases/tag/v' | head -n 1 | sed 's/.*\"\>v\([0-9]*.[0-9]*.[0-9]*\).*/\1/g')
+          echo "::set-output name=swoole_version::$swoole_version"
 
       - name: Docker meta
         id: meta
@@ -29,7 +38,7 @@ jobs:
           images:
             baoziyoo/base-images
           flavor: |
-            suffix=-php-${{ matrix.type }}-${{ matrix.php_version }}-swoole-${{ matrix.swoole_version }}
+            suffix=-php-${{ matrix.type }}-${{ matrix.php_version }}-swoole-${{steps.vars.outputs.swoole_version}}
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
             type=ref,event=branch
@@ -55,12 +64,15 @@ jobs:
           build-args: |
             PHP_VERSION=${{ matrix.php_version }}
             PHP_TYPE=${{ matrix.type }}
-            SWOOLE_VERSION=${{matrix.swoole_version}}
+            SWOOLE_VERSION=${{steps.vars.outputs.swoole_version}}
 
       - name: Update repo description
         uses: peter-evans/dockerhub-description@v2
         with:
-          repository: https://github.com/baoziyo/base-images
+          username: baoziyoo
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          repository: baoziyoo/base-images
+          short-description: ${{ github.event.repository.description }}
 
       - name: Logout
         run: docker logout
