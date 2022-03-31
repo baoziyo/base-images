@@ -17,7 +17,11 @@
 
 * `baoziyoo/base-images:latest-php-fpm-{$version}`
 * `baoziyoo/base-images:latest-php-cli-{$version}`
-* `baoziyoo/base-images:latest-php-cli-{$version}-swoole`
+* `baoziyoo/base-images:latest-php-cli-{$version}-swoole-{$swoole_version}`
 
 ## 使用方法
+
 ### `Dockerfile` 中
+
+```dockerfile
+```
