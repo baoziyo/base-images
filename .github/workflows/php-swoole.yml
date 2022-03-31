@@ -38,7 +38,7 @@ jobs:
           images:
             baoziyoo/base-images
           flavor: |
-            suffix=-php-${{ matrix.type }}-${{ matrix.php_version }}-swoole-${{steps.vars.outputs.swoole_version}}
+            prefix=-php-${{ matrix.type }}-${{ matrix.php_version }}-swoole-${{steps.vars.outputs.swoole_version}}
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
             type=ref,event=branch
