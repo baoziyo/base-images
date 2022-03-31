@@ -30,10 +30,14 @@ jobs:
         with:
           images:
             baoziyoo/base-images
+          flavor: |
+            suffix=-php-${{ matrix.type }}-${{ matrix.php_version }}-swoole-${{steps.vars.outputs.swoole_version}}
           tags: |
+            type=schedule,pattern={{date 'YYYYMMDD'}}
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
+            type=raw,value=latest
             type=semver,pattern={{major}}.{{minor}}
             type=sha
 
