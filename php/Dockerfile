@@ -12,7 +12,7 @@ RUN set -ex \
     && apk update \
     && apk add --no-cache \
         m4 autoconf gcc g++ make \
-        composer git vim \
+        git vim \
         bzip2 zip unzip freetype libjpeg-turbo libwebp jpeg libpng rabbitmq-c yaml \
         bzip2-dev libzip-dev freetype-dev libjpeg-turbo-dev libwebp-dev jpeg-dev libpng-dev rabbitmq-c-dev yaml-dev \
     
@@ -28,6 +28,10 @@ RUN set -ex \
         fi \
     && docker-php-ext-install -j$(nproc) gd zip sockets bcmath bz2 opcache pcntl pdo_mysql \
 
+    && php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" \
+    && php composer-setup.php \
+    && mv composer.phar /usr/local/bin/composer \
+
     && pecl install amqp redis yaml  \
     && echo "extension=amqp.so" > /usr/local/etc/php/conf.d/00_amqp.ini \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/00_redis.ini \
@@ -38,7 +42,8 @@ RUN set -ex \
     && echo "memory_limit=1G" >> /usr/local/etc/php/conf.d/00_default.ini \
 
     && apk del --purge *-dev m4 autoconf gcc g++ make \
-    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /usr/share/php7 ~/.pearrc \
+    && apk add --no-cache libzip-dev \
+    && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /usr/share/php7 ~/.pearrc ./composer-setup.php \
     
     && php --ini \
     && php -v \

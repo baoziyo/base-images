@@ -17,8 +17,8 @@ RUN set -ex \
         openssl-dev curl-dev \
     
     && cd /tmp \
-     && if [[ "['7.1']" == *"$(php -r "echo sprintf('%.1f',PHP_VERSION);")"* ]]; then \
-        curl -SL "https://github.com/swoole/swoole-src/archive/v2.2.0.tar.gz" -o swoole.tar.gz; \
+      && if [[ "['7.1']" == *"$(php -r "echo sprintf('%.1f',PHP_VERSION);")"* ]]; then \
+        curl -SL "https://github.com/swoole/swoole-src/archive/v4.5.4.tar.gz" -o swoole.tar.gz; \
     else \
         curl -SL "https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz" -o swoole.tar.gz; \
     fi \
@@ -35,6 +35,7 @@ RUN set -ex \
     && echo "opcache.enable_cli='On'" > /usr/local/etc/php/conf.d/00_opencache.ini \
 
     && apk del --purge *-dev m4 autoconf gcc g++ make tar \
+    && apk add --no-cache libzip-dev \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /usr/share/php7 ~/.pearrc \
     
     && php --ini \
