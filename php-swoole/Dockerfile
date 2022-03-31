@@ -17,7 +17,7 @@ RUN set -ex \
         openssl-dev curl-dev \
     
     && cd /tmp \
-      && if [[ "['7.1']" == *"$(php -r "echo sprintf('%.1f',PHP_VERSION);")"* ]]; then \
+    && if [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.1 ]; then \
         curl -SL "https://github.com/swoole/swoole-src/archive/v4.5.4.tar.gz" -o swoole.tar.gz; \
     else \
         curl -SL "https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz" -o swoole.tar.gz; \
