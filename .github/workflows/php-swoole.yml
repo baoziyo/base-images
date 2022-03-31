@@ -28,7 +28,7 @@ jobs:
         shell: bash
         id: vars
         run: |
-          swoole_version=$(curl -s https://github.com/swoole/swoole-src/releases | grep '/swoole/swoole-src/releases/tag/v' | head -n 1 | sed 's/.*\"\>v\([0-9]*.[0-9]*.[0-9]*\).*/\1/g')
+          swoole_version=$(response=$(curl -s https://github.com/swoole/swoole-src/releases | grep '/swoole/swoole-src/releases/tag/v' | head -n 1) && response=$(echo ${response%%"</a></h1>"}) && echo ${response#*"primary\">v"})
           echo "::set-output name=swoole_version::$swoole_version"
 
       - name: Docker meta
