@@ -31,7 +31,8 @@ jobs:
           images:
             baoziyoo/base-images
           flavor: |
-            prefix=-php-${{ matrix.type }}-${{ matrix.php_version }}
+            latest=false
+            prefix=php-${{ matrix.type }}-${{ matrix.php_version }}
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
             type=ref,event=branch
