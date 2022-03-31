@@ -20,7 +20,7 @@ RUN set -ex \
     && if [[ "['7.1']" == *"$(php -r "echo sprintf('%.1f',PHP_VERSION);")"* ]]; then \
         curl -SL "https://github.com/swoole/swoole-src/archive/v2.2.0.tar.gz" -o swoole.tar.gz; \
     else \
-        curl -SL "https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz" -o swoole.tar.gz; \
+        curl -SL "https://github.com/swoole/swoole-src/archive/v$(${SWOOLE_VERSION} | ).tar.gz" -o swoole.tar.gz; \
     fi \
     && mkdir -p swoole \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \

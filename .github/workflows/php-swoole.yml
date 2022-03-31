@@ -24,11 +24,10 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Get Swoole Version
-        shell: bash
         id: vars
         run: |
-          curl -s https://github.com/swoole/swoole-src/releases > response
-          swoole_version=$(cat response | grep '/swoole/swoole-src/releases/tag/v' | head -n 1 | sed 's/.*\"\>v\([0-9]*.[0-9]*.[0-9]*\).*/\1/g')
+          response=curl -s https://github.com/swoole/swoole-src/releases
+          swoole_version=$($response | grep '/swoole/swoole-src/releases/tag/v' | head -n 1 | sed 's/.*\"\>v\([0-9]*.[0-9]*.[0-9]*\).*/\1/g')
           echo "::set-output name=swoole_version::$swoole_version"
 
       - name: Docker meta

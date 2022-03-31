@@ -1,30 +1,23 @@
 # docker基础镜像
 
-## 支持
+## 支持版本
 
-### base_php fpm
+| php_version | fpm | cli | swoole |
+|---|---|---|---|
+|7.1|✅|✅|✅|
+|7.2|✅|✅|✅|
+|7.3|✅|✅|✅|
+|7.4|✅|✅|✅|
+|8.0|✅|✅|✅|
+|8.1|✅|✅|✅|
 
-* `baoziyoo/base-images:latest-php-fpm-7.1`
-* `baoziyoo/base-images:latest-php-fpm-7.2`
-* `baoziyoo/base-images:latest-php-fpm-7.3`
-* `baoziyoo/base-images:latest-php-fpm-7.4`
-* `baoziyoo/base-images:latest-php-fpm-8.0`
-* `baoziyoo/base-images:latest-php-fpm-8.1`
+## images
 
-### base_php cli
+### {$version} 为以上提供的版本
 
-* `baoziyoo/base-images:latest-php-cli-7.1`
-* `baoziyoo/base-images:latest-php-cli-7.2`
-* `baoziyoo/base-images:latest-php-cli-7.3`
-* `baoziyoo/base-images:latest-php-cli-7.4`
-* `baoziyoo/base-images:latest-php-cli-8.0`
-* `baoziyoo/base-images:latest-php-cli-8.1`
+* `baoziyoo/base-images:latest-php-fpm-{$version}`
+* `baoziyoo/base-images:latest-php-cli-{$version}`
+* `baoziyoo/base-images:latest-php-cli-{$version}-swoole`
 
-### swoole
-
-* `baoziyoo/base-images:latest-php-cli-7.1-swoole`
-* `baoziyoo/base-images:latest-php-cli-7.2-swoole`
-* `baoziyoo/base-images:latest-php-cli-7.3-swoole`
-* `baoziyoo/base-images:latest-php-cli-7.4-swoole`
-* `baoziyoo/base-images:latest-php-cli-8.0-swoole`
-* `baoziyoo/base-images:latest-php-cli-8.1-swoole`
+## 使用方法
+### `Dockerfile` 中
