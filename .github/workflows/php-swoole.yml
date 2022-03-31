@@ -5,6 +5,7 @@ on:
     workflows: [ PHP Base Image CI ]
     types:
       - completed
+  workflow_dispatch:
 
 env:
   7.1: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8
@@ -18,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: [ 'ubuntu-latest' ]
-        php_version: [ '7.1', '7.2', '7.3', '7.4' ]
+        php_version: [ '7.1', '7.2', '7.3', '7.4', '8.0', '8.1' ]
         type: [ 'cli' ]
     steps:
       - uses: actions/checkout@v2
