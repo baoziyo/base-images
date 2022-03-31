@@ -1,7 +1,7 @@
 ARG PHP_VERSION
 ARG PHP_TYPE
 
-FROM baoziyoo/base-images:latest-php-${PHP_TYPE}-${PHP_VERSION}
+FROM baoziyoo/base-images:php-${PHP_TYPE}-${PHP_VERSION}
 LABEL maintainer="ogg"
 
 ARG SWOOLE_VERSION
