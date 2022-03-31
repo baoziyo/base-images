@@ -25,6 +25,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Get Swoole Version
+        shell: bash
         id: vars
         run: |
           response=curl -s https://github.com/swoole/swoole-src/releases
