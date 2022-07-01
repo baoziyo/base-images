@@ -31,7 +31,7 @@ jobs:
         shell: bash
         id: vars
         run: |
-          echo swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases/latest | grep 'location' | head -n 1) && echo ${response##*/v})
+          swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases/latest | grep 'location' | head -n 1) && echo ${response##*/v})
           echo "::set-output name=swoole_version::$swoole_version"
 
       - name: Docker meta
