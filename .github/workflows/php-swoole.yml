@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-#  linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8
+  #  linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8
   7.1: linux/amd64
   7.2: linux/amd64
   7.3: linux/amd64
@@ -24,10 +24,25 @@ jobs:
         os: [ 'ubuntu-latest' ]
         php_version: [ '7.1', '7.2', '7.3', '7.4', '8.0', '8.1' ]
         type: [ 'cli' ]
+        swoole_version: [ '4xx','5xx' ]
+        exclude:
+          - swoole_version: '5xx'
+            php_version: [ '7.1','7.2','7.3','7.4' ]
+          - swoole_version: '4xx'
+            php_version: [ '8.0','8.1' ]
     steps:
       - uses: actions/checkout@v2
 
       - name: Get Swoole Version
+        if: ${{matrix.swoole_version}} = '4xx'
+        shell: bash
+        id: vars
+        run: |
+          swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases\?q\=v4\&expanded\=true | grep '/swoole/swoole-src/releases/tag/v' | head -n 1) && response=$(echo ${response##*/v}) && response=$(echo ${response%%\"*}))
+          echo "::set-output name=swoole_version::$swoole_version"
+
+      - name: Get Swoole Version
+        if: ${{matrix.swoole_version}} = '5xx'
         shell: bash
         id: vars
         run: |
