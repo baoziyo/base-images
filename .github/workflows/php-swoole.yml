@@ -42,7 +42,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Get Swoole Version
-        if: matrix.swoole_version = '4xx'
+        if: ${{ matrix.swoole_version == '4xx' }}
         shell: bash
         id: vars_4xx
         run: |
@@ -50,7 +50,7 @@ jobs:
           echo "::set-output name=swoole_version::$swoole_version"
 
       - name: Get Swoole Version
-        if: matrix.swoole_version = '5xx'
+        if: ${{ matrix.swoole_version == '5xx' }}
         shell: bash
         id: vars_5xx
         run: |
