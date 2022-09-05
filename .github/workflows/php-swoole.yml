@@ -36,7 +36,7 @@ jobs:
       - name: Get Swoole Version
         if: ${{matrix.swoole_version}} = '4xx'
         shell: bash
-        id: vars
+        id: vars_4xx
         run: |
           swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases\?q\=v4\&expanded\=true | grep '/swoole/swoole-src/releases/tag/v' | head -n 1) && response=$(echo ${response##*/v}) && response=$(echo ${response%%\"*}))
           echo "::set-output name=swoole_version::$swoole_version"
@@ -44,7 +44,7 @@ jobs:
       - name: Get Swoole Version
         if: ${{matrix.swoole_version}} = '5xx'
         shell: bash
-        id: vars
+        id: vars_5xx
         run: |
           swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases/latest | grep 'location' | head -n 1) && echo ${response##*/v})
           echo "::set-output name=swoole_version::$swoole_version"
