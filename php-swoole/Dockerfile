@@ -15,7 +15,8 @@ RUN set -ex \
         m4 autoconf gcc g++ make tar \
         openssl curl libstdc++ \
         openssl-dev curl-dev \
-    
+        dpkg-dev dpkg file libc-dev pkgconf re2c pcre-dev pcre2-dev zlib-dev libtool automake libaio-dev \
+
     && cd /tmp \
     && if [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.1 ]; then \
         curl -SL "https://github.com/swoole/swoole-src/archive/v4.5.4.tar.gz" -o swoole.tar.gz; \
