@@ -26,7 +26,7 @@ RUN set -ex \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && cd swoole \
     && phpize \
-    if [ ${SWOOLE_VERSION} = '5.0.0' ] \
+    && if [ ${SWOOLE_VERSION} = '5.0.0' ] \
       then \
         ./configure --enable-openssl --enable-swoole-curl --enable-cares --enable-swoole-pgsql \
       else \
