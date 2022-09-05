@@ -5,13 +5,7 @@ on:
   schedule:
     - cron: '0 0 * * 1'
 env:
-  #  linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8
-  7.1: linux/amd64,linux/arm/v6,linux/arm/v7
-  7.2: linux/amd64,linux/arm/v6,linux/arm/v7
-  7.3: linux/amd64,linux/arm/v6,linux/arm/v7
-  7.4: linux/amd64,linux/arm/v6,linux/arm/v7
-  8.0: linux/amd64,linux/arm/v6,linux/arm/v7
-  8.1: linux/amd64,linux/arm/v6,linux/arm/v7
+  platforms: linux/amd64,linux/arm/v6,linux/arm/v7
 
 jobs:
   build-php:
@@ -49,7 +43,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           file: ./php/Dockerfile
-          platforms: ${{ env[matrix.php_version] }}
+          platforms: ${{ env.platforms }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           build-args: |
