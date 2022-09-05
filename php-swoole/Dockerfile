@@ -27,7 +27,7 @@ RUN set -ex \
     && cd swoole \
     && phpize \
     && if [ ${SWOOLE_VERSION} = '5.0.0' ]; then \
-        ./configure --enable-openssl --enable-swoole-curl --enable-cares --enable-swoole-pgsql; \
+        ./configure --enable-openssl --enable-swoole-curl --enable-cares; \
     else \
         ./configure --enable-openssl --enable-http2 --enable-swoole-curl --enable-swoole-json; \
     fi \
