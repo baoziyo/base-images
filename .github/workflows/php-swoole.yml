@@ -34,27 +34,18 @@ jobs:
             php_version: '7.3'
           - swoole_version: '5xx'
             php_version: '7.4'
-          - swoole_version: '4xx'
-            php_version: '8.0'
-          - swoole_version: '4xx'
-            php_version: '8.1'
     steps:
       - uses: actions/checkout@v2
 
       - name: Get Swoole Version
-        if: ${{ matrix.swoole_version == '5xx' }}
         shell: bash
-        id: vars_5xx
+        id: vars
         run: |
-          swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases\?q\=v4\&expanded\=true | grep '/swoole/swoole-src/releases/tag/v' | head -n 1) && response=$(echo ${response##*/v}) && response=$(echo ${response%%\"*}))
-          echo "::set-output name=swoole_version::$swoole_version"
-
-      - name: Get Swoole Version
-        if: ${{ matrix.swoole_version == '4xx' }}
-        shell: bash
-        id: vars_4xx
-        run: |
-          swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases/latest | grep 'location' | head -n 1) && echo ${response##*/v})
+          if [ ${{ matrix.swoole_version }} = 4xx ]; then
+            swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases/latest | grep 'location' | head -n 1) && echo ${response##*/v})
+          else 
+            swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases\?q\=v4\&expanded\=true | grep '/swoole/swoole-src/releases/tag/v' | head -n 1) && response=$(echo ${response##*/v}) && response=$(echo ${response%%\"*}))
+          fi 
           echo "::set-output name=swoole_version::$swoole_version"
 
       - name: Docker meta
