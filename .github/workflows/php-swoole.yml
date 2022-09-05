@@ -27,14 +27,22 @@ jobs:
         swoole_version: [ '4xx','5xx' ]
         exclude:
           - swoole_version: '5xx'
-            php_version: [ '7.1','7.2','7.3','7.4' ]
+            php_version: '7.1'
+          - swoole_version: '5xx'
+            php_version: '7.2'
+          - swoole_version: '5xx'
+            php_version: '7.3'
+          - swoole_version: '5xx'
+            php_version: '7.4'
           - swoole_version: '4xx'
-            php_version: [ '8.0','8.1' ]
+            php_version: '8.0'
+          - swoole_version: '4xx'
+            php_version: '8.1'
     steps:
       - uses: actions/checkout@v2
 
       - name: Get Swoole Version
-        if: ${{matrix.swoole_version}} = '4xx'
+        if: matrix.swoole_version = '4xx'
         shell: bash
         id: vars_4xx
         run: |
@@ -42,7 +50,7 @@ jobs:
           echo "::set-output name=swoole_version::$swoole_version"
 
       - name: Get Swoole Version
-        if: ${{matrix.swoole_version}} = '5xx'
+        if: matrix.swoole_version = '5xx'
         shell: bash
         id: vars_5xx
         run: |
