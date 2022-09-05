@@ -6,12 +6,12 @@ on:
     - cron: '0 0 * * 1'
 env:
   #  linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8
-  7.1: linux/amd64
-  7.2: linux/amd64
-  7.3: linux/amd64
-  7.4: linux/amd64
-  8.0: linux/amd64
-  8.1: linux/amd64
+  7.1: linux/amd64,linux/arm/v6,linux/arm/v7
+  7.2: linux/amd64,linux/arm/v6,linux/arm/v7
+  7.3: linux/amd64,linux/arm/v6,linux/arm/v7
+  7.4: linux/amd64,linux/arm/v6,linux/arm/v7
+  8.0: linux/amd64,linux/arm/v6,linux/arm/v7
+  8.1: linux/amd64,linux/arm/v6,linux/arm/v7
 
 jobs:
   build-php:
