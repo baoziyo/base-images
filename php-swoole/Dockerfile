@@ -19,7 +19,7 @@ RUN set -ex \
     && cd /tmp \
     && if [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.1 ]; then \
         curl -SL "https://github.com/swoole/swoole-src/archive/v4.5.4.tar.gz" -o swoole.tar.gz; \
-    else if [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.2 ||  $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.3 ||  $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.4  ]; then \
+    elif [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.2 ||  $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.3 ||  $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.4  ]; then \
         curl -SL "https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz" -o swoole.tar.gz; \
     else \
         curl -SL "https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz" -o swoole.tar.gz; \
