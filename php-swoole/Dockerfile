@@ -15,7 +15,6 @@ RUN set -ex \
         m4 autoconf gcc g++ make tar \
         openssl curl libstdc++ \
         openssl-dev curl-dev \
-        dpkg-dev dpkg file libc-dev pkgconf re2c pcre-dev pcre2-dev zlib-dev libtool automake libaio-dev \
 
     && cd /tmp \
     && if [ $(php -r "echo sprintf('%.1f',PHP_VERSION);") = 7.1 ]; then \
@@ -27,7 +26,12 @@ RUN set -ex \
     && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
     && cd swoole \
     && phpize \
-    && ./configure --enable-openssl --enable-http2 --enable-swoole-curl --enable-swoole-json \
+    if [ ${SWOOLE_VERSION} = '5.0.0' ] \
+      then \
+        ./configure --enable-openssl --enable-swoole-curl --enable-cares --enable-swoole-pgsql \
+      else \
+        ./configure --enable-openssl --enable-http2 --enable-swoole-curl --enable-swoole-json \
+    fi \
     && make -s -j$(nproc) \
     && make install \
 
