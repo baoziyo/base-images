@@ -28,7 +28,7 @@ RUN set -ex \
         fi \
     && docker-php-ext-install -j$(nproc) gd zip sockets bcmath bz2 opcache pcntl pdo_mysql \
 
-    && php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" \
+    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && mv composer.phar /usr/local/bin/composer \
 
