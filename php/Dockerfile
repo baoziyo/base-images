@@ -36,7 +36,7 @@ RUN set -ex \
          pecl install amqp-1.11.0; \
        else \
          pecl install amqp; \
-       fi; \
+       fi \
     && if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
          pecl install -o -f redis-4.3.0; \
        elif [ $(php -r "echo PHP_MAJOR_VERSION;") = "7" ] && { [ $(php -r "echo PHP_MINOR_VERSION;") = "0" ] || [ $(php -r "echo PHP_MINOR_VERSION;") = "1" ] ;}; then \
