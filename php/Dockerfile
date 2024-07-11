@@ -32,7 +32,29 @@ RUN set -ex \
     && php composer-setup.php \
     && mv composer.phar /usr/local/bin/composer \
 
-    && pecl install amqp redis yaml  \
+    && if ["$(php -r "echo sprintf('%.1f',PHP_VERSION);")" = "7.3" ] \
+        || [ "$(php -r "echo sprintf('%.1f',PHP_VERSION);")" = "7.2" ] \
+        || [ "$(php -r "echo sprintf('%.1f',PHP_VERSION);")" = "7.1" ] \
+        || [ "$(php -r "echo sprintf('%.1f',PHP_VERSION);")" = "7.0" ] \
+        || [ "$(php -r "echo sprintf('%.1f',PHP_VERSION);")" = "5.6" ]; then \
+        pecl install amqp-1.11.0; \
+      else \
+        pecl install amqp; \
+      fi; \
+    && if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
+         pecl install -o -f redis-4.3.0; \
+       elif [ $(php -r "echo PHP_MAJOR_VERSION;") = "7" ] && { [ $(php -r "echo PHP_MINOR_VERSION;") = "0" ] || [ $(php -r "echo PHP_MINOR_VERSION;") = "1" ] ;}; then \
+         pecl install -o -f redis-5.3.7; \
+       else \
+         pecl install -o -f redis; \
+       fi \
+    && if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
+           echo '' | pecl install -a yaml-1.3.2; \
+       elif [ $(php -r "echo PHP_MAJOR_VERSION;") = "7" ] && [ $(php -r "echo PHP_MINOR_VERSION;") = "0" ]; then \
+           echo '' | pecl install yaml-2.0.4; \
+       else \
+           echo '' | pecl install yaml; \
+       fi \
     && echo "extension=amqp.so" > /usr/local/etc/php/conf.d/00_amqp.ini \
     && echo "extension=redis.so" > /usr/local/etc/php/conf.d/00_redis.ini \
     && echo "extension=yaml.so" > /usr/local/etc/php/conf.d/00_yaml.ini \
