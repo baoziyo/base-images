@@ -5,7 +5,7 @@ FROM php:${PHP_VERSION}-${PHP_TYPE}-alpine
 
 LABEL maintainer="ogg"
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN set -ex \
     # && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \

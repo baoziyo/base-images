@@ -5,8 +5,8 @@ FROM baoziyoo/base-images:php-${PHP_TYPE}-${PHP_VERSION}
 LABEL maintainer="ogg"
 
 ARG SWOOLE_VERSION
-ENV SWOOLE_VERSION ${SWOOLE_VERSION}
-ENV DEBIAN_FRONTEND noninteractive
+ENV SWOOLE_VERSION=${SWOOLE_VERSION}
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN set -ex \
     # && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
