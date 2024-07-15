@@ -49,6 +49,8 @@ jobs:
             swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases\?q\=v5\&expanded\=true | grep '/swoole/swoole-src/releases/tag/v' | head -n 1) && response=$(echo ${response##*/v}) && response=$(echo ${response%%\"*}) && echo ${response})
           elif [ ${{ matrix.swoole_version }} = 6xx ]; then
             swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases\?q\=v6\&expanded\=true | grep '/swoole/swoole-src/releases/tag/v' | head -n 1) && response=$(echo ${response##*/v}) && response=$(echo ${response%%\"*}) && echo ${response})
+          else
+            swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases/latest | grep 'location' | head -n 1) && echo ${response##*/v})
           fi
           echo "::set-output name=swoole_version::$swoole_version"
 
