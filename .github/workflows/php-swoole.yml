@@ -18,7 +18,7 @@ jobs:
         os: [ 'ubuntu-latest' ]
         php_version: [ '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2','8.3' ]
         type: [ 'cli' ]
-        swoole_version: [ '4xx','5xx' ]
+        swoole_version: [ '4xx','5xx','6xx' ]
         exclude:
           - swoole_version: '5xx'
             php_version: '7.1'
@@ -27,6 +27,14 @@ jobs:
           - swoole_version: '5xx'
             php_version: '7.3'
           - swoole_version: '5xx'
+            php_version: '7.4'
+          - swoole_version: '6xx'
+            php_version: '7.1'
+          - swoole_version: '6xx'
+            php_version: '7.2'
+          - swoole_version: '6xx'
+            php_version: '7.3'
+          - swoole_version: '6xx'
             php_version: '7.4'
     steps:
       - uses: actions/checkout@v2
@@ -37,8 +45,11 @@ jobs:
         run: |
           if [ ${{ matrix.swoole_version }} = 4xx ]; then
             swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases\?q\=v4\&expanded\=true | grep '/swoole/swoole-src/releases/tag/v' | head -n 1) && response=$(echo ${response##*/v}) && response=$(echo ${response%%\"*}) && echo ${response})
-          else
-            swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases/latest | grep 'location' | head -n 1) && echo ${response##*/v})
+          else if [ ${{ matrix.swoole_version }} = 5xx ]; then
+            swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases\?q\=v5\&expanded\=true | grep '/swoole/swoole-src/releases/tag/v' | head -n 1) && response=$(echo ${response##*/v}) && response=$(echo ${response%%\"*}) && echo ${response})
+          else if [ ${{ matrix.swoole_version }} = 6xx ]; then
+            swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases\?q\=v6\&expanded\=true | grep '/swoole/swoole-src/releases/tag/v' | head -n 1) && response=$(echo ${response##*/v}) && response=$(echo ${response%%\"*}) && echo ${response})
+#            swoole_version=$(response=$(curl -s -i https://github.com/swoole/swoole-src/releases/latest | grep 'location' | head -n 1) && echo ${response##*/v})
           fi
           echo "::set-output name=swoole_version::$swoole_version"
 
