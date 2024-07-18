@@ -40,6 +40,8 @@ jobs:
             php_version: '7.3'
           - swoole_version: '6xx'
             php_version: '7.4'
+          - swoole_version: '6xx'
+            php_version: '8.0'
     steps:
       - uses: actions/checkout@v2
 
