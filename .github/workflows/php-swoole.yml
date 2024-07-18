@@ -20,6 +20,8 @@ jobs:
         type: [ 'cli' ]
         swoole_version: [ '4xx','5xx','6xx' ]
         exclude:
+          - swoole_version: '4xx'
+            php_version: '8.3'
           - swoole_version: '5xx'
             php_version: '7.1'
           - swoole_version: '5xx'
@@ -28,6 +30,8 @@ jobs:
             php_version: '7.3'
           - swoole_version: '5xx'
             php_version: '7.4'
+          - swoole_version: '5xx'
+            php_version: '8.3'
           - swoole_version: '6xx'
             php_version: '7.1'
           - swoole_version: '6xx'
