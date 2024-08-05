@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: '0 0 * * 1'
 env:
-  platforms: linux/amd64,linux/arm/v6,linux/arm/v7
+  platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x
 
 jobs:
   build-php:

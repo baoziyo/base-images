@@ -30,6 +30,8 @@ RUN set -ex \
     && phpize \
     && if [ ${SWOOLE_VERSION} = '5.0.0' ]; then \
         ./configure --enable-openssl --enable-swoole-curl; \
+    elif [ ${SWOOLE_VERSION} = '6.0.0' ]; then \
+        ./configure --enable-openssl --enable-swoole-curl; \
     else \
         ./configure --enable-openssl --enable-http2 --enable-swoole-curl --enable-swoole-json; \
     fi \
@@ -43,7 +45,7 @@ RUN set -ex \
     && apk del --purge *-dev m4 autoconf gcc g++ make tar \
     && apk add --no-cache libzip-dev \
     && rm -rf /var/cache/apk/* /tmp/* /usr/share/man /usr/share/php7 ~/.pearrc \
-    
+
     && php --ini \
     && php -v \
     && php -m \
