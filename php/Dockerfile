@@ -42,7 +42,7 @@ RUN set -ex \
        elif [ $(php -r "echo PHP_MAJOR_VERSION;") = "7" ] && { [ $(php -r "echo PHP_MINOR_VERSION;") = "0" ] || [ $(php -r "echo PHP_MINOR_VERSION;") = "1" ] ;}; then \
          pecl install -o -f redis-5.3.7; \
        elif [ $(php -r "echo PHP_MAJOR_VERSION;") = "7" ] && { [ $(php -r "echo PHP_MINOR_VERSION;") = "2" ] || [ $(php -r "echo PHP_MINOR_VERSION;") = "3" ] ;}; then \
-         pecl install -o -f redis-6.0.2 \
+         pecl install -o -f redis-6.0.2; \
        else \
          pecl install -o -f redis; \
        fi \
